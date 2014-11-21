@@ -9,6 +9,7 @@ use Data::Dumper;
 
 my $src_url = q[http://data.gcis-dev-front.joss.ucar.edu];
 my $dst_url = q[http://data-stage.globalchange.gov];
+my $what = q[/organization];
 my $verbose = 1;
 
 my $src = Gcis::Client->new(url => $src_url );
@@ -18,8 +19,6 @@ sub same {
     my ($x,$y) = @_;
     return !( Dump($x) cmp Dump($y) );
 }
-
-my $what = q[/organization];
 
 say "src : ".$src->url;
 say "dst : ".$dst->url;
