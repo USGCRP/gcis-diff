@@ -40,12 +40,12 @@ my %dst = map {$_->{uri} => $_} @dst;
 say "identifiers :";
 my @only_in_src = grep !exists($dst{$_}), keys %src;
 my @only_in_dst = grep !exists($src{$_}), keys %dst;
-say "      common : ".(grep exists($dst{$_}), keys %src);
+my @common      = grep exists($dst{$_}), keys %src;
+say "      common : ".@common;
 say " only in src : ".@only_in_src;
 say " only in dst : ".@only_in_dst;
 
 say "content : ";
-my @common    = grep exists($dst{$_}), keys %src;
 my @same      = grep same($src{$_},$dst{$_}), @common;
 my @different = grep !same($src{$_},$dst{$_}), @common;
 say "        same : ".@same;
