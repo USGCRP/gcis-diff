@@ -9,7 +9,7 @@ use Data::Dumper;
 
 my $src_url = q[http://data.gcis-dev-front.joss.ucar.edu];
 my $dst_url = q[http://data-stage.globalchange.gov];
-my $what = q[/organization];
+my $what = $ARGV[0] || q[/organization];
 my $verbose = 1;
 
 my $src = Gcis::Client->new(url => $src_url );
