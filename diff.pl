@@ -9,7 +9,7 @@ use Data::Dumper;
 
 my $src_url = q[http://data.gcis-dev-front.joss.ucar.edu];
 my $dst_url = q[http://data-stage.globalchange.gov];
-my $what = $ARGV[0] || q[/organization];
+my $what = $ARGV[0] || q[organization];
 my $verbose = 1;
 
 my $src = Gcis::Client->new(url => $src_url );
@@ -24,8 +24,8 @@ say "src : ".$src->url;
 say "dst : ".$dst->url;
 say "resource : $what";
 
-my @src = $src->get("$what?all=1");
-my @dst = $dst->get("$what?all=1");
+my @src = $src->get("/$what?all=1");
+my @dst = $dst->get("/$what?all=1");
 
 delete $_->{href} for @src, @dst;
 
@@ -52,8 +52,10 @@ say "        same : ".@same;
 say "   different : ".@different;
 
 if ($verbose) {
-    say "Only in $src_url : ";
-    say $_ for @only_in_src;
+    say "\nOnly in $src_url : ";
+    say " ".$_ for @only_in_src;
+    say "\nOnly in $dst_url : ";
+    say " ".$_ for @only_in_dst;
     say "\nDifferences between resources in both places : ";
     for (@different) {
         say "uri : ".$_;
